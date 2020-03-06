@@ -1,5 +1,15 @@
 version: 0.2
 phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - printenv
+      - echo -n "$CODEBUILD_LOG_PATH" > /tmp/build_id.out
+      - printf "%s:%s" "$REPOSITORY_URI" "$(cat /tmp/build_id.out)" > /tmp/build_tag.out
+      - printf '{"tag":"%s"}' "$(cat /tmp/build_id.out)" > /tmp/build.json
+
   install:
     commands:
       - |
