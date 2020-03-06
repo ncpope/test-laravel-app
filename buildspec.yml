@@ -40,15 +40,5 @@ phases:
       - ./vendor/bin/phpunit
 
 artifacts:
-  files:
-    - LaravelTestAppBuild
-  name: LaravelTestAppBuild
+  files: /tmp/build.json
   discard-paths: yes
-  base-directory: builds
-  secondary-artifacts:
-    artifactIdentifier:
-      files:
-        - LaravelTestAppBuildData
-      name: LaravelTestAppBuildData
-      discard-paths: yes
-      base-directory: builds/data
